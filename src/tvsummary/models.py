@@ -30,7 +30,7 @@ class Show:
         self.rating = (
             rating
             if (
-                isinstance(rating, (int, float))
+                isinstance(rating, int | float)
                 and not isinstance(rating, bool)
                 and math.isfinite(rating)
                 and 0 <= rating <= 10

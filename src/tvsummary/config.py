@@ -54,7 +54,7 @@ def _validate_settings(values: dict[str, Any]) -> Settings:
     timeout = values["timeout"]
     if (
         isinstance(timeout, bool)
-        or not isinstance(timeout, (int, float))
+        or not isinstance(timeout, int | float)
         or not math.isfinite(timeout)
         or timeout <= 0
     ):
