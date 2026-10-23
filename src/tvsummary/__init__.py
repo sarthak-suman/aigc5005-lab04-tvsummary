@@ -1,5 +1,3 @@
-"""Public names for the TV summary package."""
-
 from .aggregations import Aggregation, AverageRatingByLanguage, ShowsPerGenre
 from .errors import DownloadError
 from .models import Show

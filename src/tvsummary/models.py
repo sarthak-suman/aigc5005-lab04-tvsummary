@@ -1,5 +1,3 @@
-"""Clean one TVMaze show in one place."""
-
 import logging
 import math
 from typing import Any
@@ -8,8 +6,6 @@ logger = logging.getLogger(__name__)
 
 
 class Show:
-    """A show with cleaned genres, language and rating."""
-
     def __init__(self, record: dict[str, Any]) -> None:
         name = record.get("name")
         self.name = (

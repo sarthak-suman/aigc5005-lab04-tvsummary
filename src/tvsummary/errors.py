@@ -1,6 +1,3 @@
-"""Expected failures exposed by the TV summary package."""
-
-
 class TVSummaryError(Exception):
     """Base class for expected package failures handled by main()."""
 

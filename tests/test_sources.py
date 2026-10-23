@@ -1,5 +1,3 @@
-"""Response and download tests never contact TVMaze."""
-
 import pytest
 import requests
 

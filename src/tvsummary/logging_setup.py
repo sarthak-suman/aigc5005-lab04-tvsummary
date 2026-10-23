@@ -1,5 +1,3 @@
-"""Configure application logging at the entry point."""
-
 import logging
 
 

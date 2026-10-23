@@ -1,5 +1,3 @@
-"""Load and validate reproducible settings from TOML."""
-
 import math
 import tomllib
 from dataclasses import dataclass
@@ -23,7 +21,6 @@ class Settings:
 
 
 def load_settings(path: Path = Path("config/tvsummary.toml")) -> Settings:
-    """Read all required settings or raise an actionable settings error."""
     try:
         with path.open("rb") as file:
             values = tomllib.load(file)
@@ -33,7 +30,6 @@ def load_settings(path: Path = Path("config/tvsummary.toml")) -> Settings:
 
 
 def _validate_settings(values: dict[str, Any]) -> Settings:
-    """Reject incomplete files and values that cannot be used safely."""
     required = {
         "source_url",
         "timeout",

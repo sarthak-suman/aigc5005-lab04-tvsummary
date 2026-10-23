@@ -1,5 +1,3 @@
-"""Logging is observable without contacting the network."""
-
 import logging
 
 from tvsummary import Show, build_summary

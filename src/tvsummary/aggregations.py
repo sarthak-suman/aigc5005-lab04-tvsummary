@@ -1,5 +1,3 @@
-"""Related calculations sharing a compute interface."""
-
 from abc import ABC, abstractmethod
 from typing import Any
 
@@ -7,20 +5,15 @@ from .models import Show
 
 
 class Aggregation(ABC):
-    """Base for a named summary calculation."""
-
     def __init__(self, key: str) -> None:
         self.key = key
 
     @abstractmethod
     def compute(self, records: list[Show]) -> dict[str, Any]:
-        """Calculate one summary section."""
         raise NotImplementedError
 
 
 class ShowsPerGenre(Aggregation):
-    """Calculate shows per genre."""
-
     def __init__(self) -> None:
         super().__init__("shows_per_genre")
 
@@ -45,8 +38,6 @@ class ShowsPerGenre(Aggregation):
 
 
 class AverageRatingByLanguage(Aggregation):
-    """Calculate average rating by language."""
-
     def __init__(self) -> None:
         super().__init__("average_rating_by_language")
 

@@ -1,5 +1,3 @@
-"""Compatibility wrapper; use python -m tvsummary.main for Lab 04."""
-
 from tvsummary.main import main
 
 if __name__ == "__main__":

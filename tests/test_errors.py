@@ -1,5 +1,3 @@
-"""The public errors have one package-wide catch boundary."""
-
 import pytest
 
 from tvsummary import DownloadError

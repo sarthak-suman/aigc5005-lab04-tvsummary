@@ -1,5 +1,3 @@
-"""Cleaning behavior for individual shows."""
-
 import pytest
 
 from tvsummary import Show

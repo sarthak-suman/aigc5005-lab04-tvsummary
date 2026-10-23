@@ -1,5 +1,3 @@
-"""Build reproducible summaries and write reports with run metadata."""
-
 import json
 import logging
 import platform

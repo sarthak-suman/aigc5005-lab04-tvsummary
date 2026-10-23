@@ -1,5 +1,3 @@
-"""Command-line entry point and the package exception boundary."""
-
 import argparse
 import logging
 import sys

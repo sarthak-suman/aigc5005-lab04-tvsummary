@@ -1,5 +1,3 @@
-"""Shared handmade input and a guard against real network calls."""
-
 import pytest
 
 from tvsummary import Show

@@ -1,5 +1,3 @@
-"""Handmade examples protect the original aggregation values."""
-
 from tvsummary import AverageRatingByLanguage, ShowsPerGenre
 
 

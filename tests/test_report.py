@@ -1,5 +1,3 @@
-"""Summary construction and output preserve baseline behavior."""
-
 import json
 
 from tvsummary import build_summary, write_summary

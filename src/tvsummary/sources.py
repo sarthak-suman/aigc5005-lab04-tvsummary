@@ -1,5 +1,3 @@
-"""Download and validate TVMaze records."""
-
 import logging
 
 import requests
@@ -12,8 +10,6 @@ logger = logging.getLogger(__name__)
 
 
 class TVMazeSource:
-    """Fetch show objects from the configured API."""
-
     def __init__(self, url: str | None = None, timeout: float | None = None) -> None:
         if url is None or timeout is None:
             settings = load_settings()
@@ -23,7 +19,6 @@ class TVMazeSource:
         self.timeout = timeout
 
     def fetch(self) -> list[Show]:
-        """Return cleaned shows or raise a clear package error."""
         logger.info("Downloading show records")
         return self._download()
 

@@ -1,5 +1,3 @@
-"""TOML files must be complete, valid and immutable after loading."""
-
 from dataclasses import FrozenInstanceError
 
 import pytest
