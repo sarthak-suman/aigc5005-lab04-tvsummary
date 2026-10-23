@@ -1,8 +1,7 @@
 import json
+import platform
 from dataclasses import replace
 from pathlib import Path
-import platform
-
 
 import pytest
 
