@@ -1,4 +1,5 @@
 """Related calculations sharing a compute interface."""
+
 from abc import ABC, abstractmethod
 
 
@@ -88,5 +89,3 @@ class AverageRatingByLanguage(Aggregation):
             "shows_without_valid_rating": missing_rating,
             "shows_included": sum(len(ratings) for ratings in groups.values()),
         }
-
-

@@ -1,5 +1,7 @@
 """Download and validate TVMaze records."""
+
 import requests
+
 from .config import SOURCE_URL, TIMEOUT
 from .models import Show
 

@@ -1,5 +1,6 @@
 """Run the TV summary package."""
-from tvsummary import TVMazeSource, DownloadError, build_summary, write_summary
+
+from tvsummary import DownloadError, TVMazeSource, build_summary, write_summary
 from tvsummary.config import OUTPUT
 
 

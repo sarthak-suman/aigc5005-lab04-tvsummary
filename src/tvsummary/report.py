@@ -1,7 +1,9 @@
 """Build and write the summary."""
+
 import json
-from .config import SOURCE_URL, OUTPUT
-from .aggregations import ShowsPerGenre, AverageRatingByLanguage
+
+from .aggregations import AverageRatingByLanguage, ShowsPerGenre
+from .config import OUTPUT, SOURCE_URL
 
 
 def build_summary(records, source_url=SOURCE_URL):
