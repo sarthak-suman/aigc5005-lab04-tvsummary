@@ -1,6 +1,8 @@
 import json
 from dataclasses import replace
 from pathlib import Path
+import platform
+
 
 import pytest
 
@@ -64,7 +66,7 @@ def test_main_success_writes_both_reports(monkeypatch, capsys, settings, shows):
     assert run_info["settings"]["seed"] == 42
     assert set(run_info["tool_versions"]) == {"pytest", "mypy", "ruff"}
     assert all(run_info["tool_versions"].values())
-    assert run_info["python_version"].startswith("3.11.")
+    assert run_info["python_version"] == platform.python_version()
 
 
 def test_main_output_failure(monkeypatch, capsys, settings, shows, tmp_path):
