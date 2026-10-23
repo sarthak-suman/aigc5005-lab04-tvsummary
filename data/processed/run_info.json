@@ -1,0 +1,16 @@
+{
+  "settings": {
+    "source_url": "https://api.tvmaze.com/shows?page=0",
+    "timeout": 30.0,
+    "output_folder": "data\\processed",
+    "seed": 42,
+    "sample_size": 5,
+    "log_level": "INFO"
+  },
+  "python_version": "3.11.17",
+  "tool_versions": {
+    "pytest": "9.1.1",
+    "mypy": "2.4.0",
+    "ruff": "0.17.2"
+  }
+}

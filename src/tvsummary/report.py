@@ -90,7 +90,7 @@ def _write_json(document: dict[str, Any], path: Path) -> None:
     """Translate filesystem failures at the output boundary."""
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
-        with path.open("w", encoding="utf-8") as file:
+        with path.open("w", encoding="utf-8", newline="\n") as file:
             json.dump(document, file, indent=2, ensure_ascii=False)
             file.write("\n")
     except OSError as error:

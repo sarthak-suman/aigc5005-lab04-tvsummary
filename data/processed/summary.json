@@ -42,5 +42,12 @@
     "shows_without_valid_language": 0,
     "shows_without_valid_rating": 4,
     "shows_included": 236
-  }
+  },
+  "featured_shows": [
+    "How I Met Your Mother",
+    "American Horror Story",
+    "Homeland",
+    "The Fosters",
+    "The Walking Dead"
+  ]
 }
