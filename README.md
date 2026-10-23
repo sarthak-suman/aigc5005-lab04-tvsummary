@@ -148,3 +148,19 @@ its unchanged .gitignore in a dedicated commit, followed by all remaining unchan
 Lab 03 files. This resolves the lab's conflicting instructions to put .gitignore
 before code while retaining an unchanged Lab 03 starting point. Formatting and
 import cleanup have their own commit, separate from behavior changes.
+
+## Verification results
+
+Verified on October 22, 2026, from a fresh clone in a separate folder and a newly
+created `tvsummary-lab04-check` Conda environment. The pinned requirements and the
+editable package installed successfully; pip check reported no broken requirements.
+The imported package path pointed into the verification clone.
+
+- Ruff format check: passed (20 Python files).
+- Ruff lint: passed.
+- Mypy: passed (9 package source files).
+- Pytest: 61 offline cases passed.
+- Real application: exit 0, 240 shows, both JSON reports written.
+- Missing config: exit 1, an `Error:` line on stderr, no stdout or traceback.
+- Original Lab 03 saved summary: every original key and value matched the new
+  successful run exactly; only `featured_shows` was added.
