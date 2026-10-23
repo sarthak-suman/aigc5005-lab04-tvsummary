@@ -1,58 +1,47 @@
-"""Offline tests using handmade records."""
+"""Cleaning behavior for individual shows."""
 
-import unittest
+import pytest
 
-from tvsummary import AverageRatingByLanguage, Show, ShowsPerGenre
+from tvsummary import Show
 
 
-class ShowTests(unittest.TestCase):
-    def test_clean_values(self):
-        show = Show(
-            {
-                "name": " Example ",
-                "genres": [" Drama ", "Drama", "", None],
-                "language": " English ",
-                "rating": {"average": 8},
-            }
-        )
-        self.assertEqual(show.genres, {"Drama"})
-        self.assertEqual(show.language, "English")
-        self.assertEqual(show.rating, 8)
-        self.assertEqual(str(show), "Example")
+def test_clean_values():
+    show = Show(
+        {
+            "name": " Example ",
+            "genres": [" Drama ", "Drama", "", None],
+            "language": " English ",
+            "rating": {"average": 8},
+        }
+    )
+    assert show.genres == {"Drama"}
+    assert show.language == "English"
+    assert show.rating == 8
+    assert str(show) == "Example"
 
-    def test_invalid_values(self):
-        for rating in [None, True, "8", -1, 11, float("nan"), float("inf")]:
-            show = Show(
-                {"genres": "Drama", "language": " ", "rating": {"average": rating}}
-            )
-            self.assertEqual(show.genres, set())
-            self.assertIsNone(show.language)
-            self.assertIsNone(show.rating)
 
-    def test_aggregations(self):
-        shows = [
-            Show(
-                {
-                    "genres": ["Drama", "Drama"],
-                    "language": "English",
-                    "rating": {"average": 8},
-                }
-            ),
-            Show(
-                {"genres": ["Drama"], "language": "English", "rating": {"average": 6}}
-            ),
-            Show({}),
-        ]
-        self.assertEqual(
-            ShowsPerGenre().compute(shows),
-            {"counts": {"Drama": 2}, "shows_without_valid_genres": 1},
-        )
-        self.assertEqual(
-            AverageRatingByLanguage().compute(shows),
-            {
-                "languages": {"English": {"average_rating": 7.0, "rated_shows": 2}},
-                "shows_without_valid_language": 1,
-                "shows_without_valid_rating": 1,
-                "shows_included": 2,
-            },
-        )
+def test_missing_genres():
+    assert Show({}).genres == set()
+
+
+def test_missing_rating():
+    assert Show({}).rating is None
+
+
+@pytest.mark.parametrize(
+    "rating", [None, True, "8", -1, 11, float("nan"), float("inf")]
+)
+def test_invalid_rating(rating):
+    assert Show({"rating": {"average": rating}}).rating is None
+
+
+@pytest.mark.parametrize("rating", [0, 10, 7.5])
+def test_valid_rating_boundaries(rating):
+    assert Show({"rating": {"average": rating}}).rating == rating
+
+
+def test_missing_name_and_blank_language():
+    show = Show({"name": " ", "language": " ", "genres": "Drama"})
+    assert str(show) == "Unknown show"
+    assert show.language is None
+    assert show.genres == set()
