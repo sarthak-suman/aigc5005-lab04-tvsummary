@@ -4,6 +4,7 @@ import pytest
 import requests
 
 from tvsummary import DownloadError, TVMazeSource
+from tvsummary.errors import ResponseShapeError
 
 
 class FakeResponse:
@@ -51,5 +52,33 @@ def test_invalid_response(monkeypatch, payload, message):
     monkeypatch.setattr(
         "tvsummary.sources.requests.get", lambda *args, **kwargs: FakeResponse(payload)
     )
-    with pytest.raises(DownloadError, match=message):
+    with pytest.raises(ResponseShapeError, match=message):
         TVMazeSource().fetch()
+
+
+def test_invalid_json_is_chained(monkeypatch):
+    class InvalidJSONResponse(FakeResponse):
+        def json(self):
+            raise ValueError("invalid JSON")
+
+    monkeypatch.setattr(
+        "tvsummary.sources.requests.get",
+        lambda *args, **kwargs: InvalidJSONResponse(None),
+    )
+    with pytest.raises(ResponseShapeError, match="valid JSON") as caught:
+        TVMazeSource().fetch()
+    assert isinstance(caught.value.__cause__, ValueError)
+
+
+def test_http_failure_is_chained(monkeypatch):
+    class HTTPFailureResponse(FakeResponse):
+        def raise_for_status(self):
+            raise requests.HTTPError("503 unavailable")
+
+    monkeypatch.setattr(
+        "tvsummary.sources.requests.get",
+        lambda *args, **kwargs: HTTPFailureResponse(None),
+    )
+    with pytest.raises(DownloadError, match="503 unavailable") as caught:
+        TVMazeSource().fetch()
+    assert isinstance(caught.value.__cause__, requests.HTTPError)

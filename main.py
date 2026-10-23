@@ -1,7 +1,8 @@
 """Run the TV summary package."""
 
-from tvsummary import DownloadError, TVMazeSource, build_summary, write_summary
+from tvsummary import TVMazeSource, build_summary, write_summary
 from tvsummary.config import OUTPUT
+from tvsummary.errors import OutputError, TVSummaryError
 
 
 def main():
@@ -9,13 +10,13 @@ def main():
     source = TVMazeSource()
     try:
         records = source.fetch()
-    except DownloadError as error:
+    except TVSummaryError as error:
         print(f"Download failed: {error}")
         return 1
     summary = build_summary(records, source.url)
     try:
         write_summary(summary)
-    except OSError as error:
+    except OutputError as error:
         print(f"Could not save the summary: {error}")
         return 1
     print(f"Processed {len(records)} shows.")

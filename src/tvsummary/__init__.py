@@ -1,9 +1,10 @@
 """Public names for the TV summary package."""
 
 from .aggregations import Aggregation, AverageRatingByLanguage, ShowsPerGenre
+from .errors import DownloadError
 from .models import Show
 from .report import build_summary, write_summary
-from .sources import DownloadError, TVMazeSource
+from .sources import TVMazeSource
 
 __all__ = [
     "Show",
