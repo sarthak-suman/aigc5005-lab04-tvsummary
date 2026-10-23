@@ -1,16 +1,19 @@
 """Related calculations sharing a compute interface."""
 
 from abc import ABC, abstractmethod
+from typing import Any
+
+from .models import Show
 
 
 class Aggregation(ABC):
     """Base for a named summary calculation."""
 
-    def __init__(self, key):
+    def __init__(self, key: str) -> None:
         self.key = key
 
     @abstractmethod
-    def compute(self, records):
+    def compute(self, records: list[Show]) -> dict[str, Any]:
         """Calculate one summary section."""
         raise NotImplementedError
 
@@ -18,12 +21,12 @@ class Aggregation(ABC):
 class ShowsPerGenre(Aggregation):
     """Calculate shows per genre."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("shows_per_genre")
 
-    def compute(self, records):
+    def compute(self, records: list[Show]) -> dict[str, Any]:
         """Count each show once in each of its valid genres."""
-        counts = {}
+        counts: dict[str, int] = {}
         without_genres = 0
 
         for record in records:
@@ -44,12 +47,12 @@ class ShowsPerGenre(Aggregation):
 class AverageRatingByLanguage(Aggregation):
     """Calculate average rating by language."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("average_rating_by_language")
 
-    def compute(self, records):
+    def compute(self, records: list[Show]) -> dict[str, Any]:
         """Average valid ratings by language and report excluded shows."""
-        groups = {}
+        groups: dict[str, list[float]] = {}
         missing_language = 0
         missing_rating = 0
 
@@ -65,7 +68,7 @@ class AverageRatingByLanguage(Aggregation):
             if not rating_ok:
                 missing_rating += 1
 
-            if not language_ok or not rating_ok:
+            if language is None or rating is None:
                 continue
 
             language = language.strip()

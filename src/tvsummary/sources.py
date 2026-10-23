@@ -14,16 +14,16 @@ logger = logging.getLogger(__name__)
 class TVMazeSource:
     """Fetch show objects from the configured API."""
 
-    def __init__(self, url=SOURCE_URL, timeout=TIMEOUT):
+    def __init__(self, url: str = SOURCE_URL, timeout: float = TIMEOUT) -> None:
         self.url = url
         self.timeout = timeout
 
-    def fetch(self):
+    def fetch(self) -> list[Show]:
         """Return cleaned shows or raise a clear package error."""
         logger.info("Downloading show records")
         return self._download()
 
-    def _download(self):
+    def _download(self) -> list[Show]:
         """Download and validate a list of at least 50 show records."""
         try:
             response = requests.get(self.url, timeout=self.timeout)

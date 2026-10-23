@@ -2,6 +2,7 @@
 
 import logging
 import math
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -9,7 +10,7 @@ logger = logging.getLogger(__name__)
 class Show:
     """A show with cleaned genres, language and rating."""
 
-    def __init__(self, record):
+    def __init__(self, record: dict[str, Any]) -> None:
         name = record.get("name")
         self.name = (
             name.strip() if isinstance(name, str) and name.strip() else "Unknown show"
@@ -43,5 +44,5 @@ class Show:
         if rating is not None and self.rating is None:
             logger.warning("Excluded an invalid rating for show %s", self.name)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name

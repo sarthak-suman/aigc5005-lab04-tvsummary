@@ -12,6 +12,9 @@ dependencies = ["requests>=2.31,<3"]
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+tvsummary = ["py.typed"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
