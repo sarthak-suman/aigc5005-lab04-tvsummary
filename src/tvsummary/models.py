@@ -1,6 +1,9 @@
 """Clean one TVMaze show in one place."""
 
+import logging
 import math
+
+logger = logging.getLogger(__name__)
 
 
 class Show:
@@ -37,6 +40,8 @@ class Show:
             )
             else None
         )
+        if rating is not None and self.rating is None:
+            logger.warning("Excluded an invalid rating for show %s", self.name)
 
     def __str__(self):
         return self.name
