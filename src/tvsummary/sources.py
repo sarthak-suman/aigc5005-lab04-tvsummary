@@ -4,7 +4,7 @@ import logging
 
 import requests
 
-from .config import SOURCE_URL, TIMEOUT
+from .config import load_settings
 from .errors import DownloadError, ResponseShapeError
 from .models import Show
 
@@ -14,7 +14,11 @@ logger = logging.getLogger(__name__)
 class TVMazeSource:
     """Fetch show objects from the configured API."""
 
-    def __init__(self, url: str = SOURCE_URL, timeout: float = TIMEOUT) -> None:
+    def __init__(self, url: str | None = None, timeout: float | None = None) -> None:
+        if url is None or timeout is None:
+            settings = load_settings()
+            url = settings.source_url if url is None else url
+            timeout = settings.timeout if timeout is None else timeout
         self.url = url
         self.timeout = timeout
 

@@ -14,5 +14,5 @@ def test_invalid_rating_is_logged(caplog):
 
 def test_summary_milestone_is_logged(caplog, shows):
     with caplog.at_level(logging.INFO, logger="tvsummary.report"):
-        build_summary(shows)
+        build_summary(shows, seed=42, sample_size=2)
     assert "Building summary for 3 shows" in caplog.text
